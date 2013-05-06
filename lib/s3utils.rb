@@ -17,7 +17,7 @@ class S3Utils
 
   def store(file_path)
     obj = @s3_bucket.objects[File.basename(file_path)]
-    obj.write(file_path)
+    obj.write(Pathname.new(file_path))
     # AWS::S3::S3Object.store(File.basename(file_path), open(file_path), @bucket)
   end
 
