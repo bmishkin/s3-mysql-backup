@@ -30,7 +30,7 @@ class S3MysqlBackup
   protected
   
   def config
-    @s3config ||= YAML::load_file(ERB.new(@path_to_config))
+    @s3config ||= YAML.load(ERB.new(File.read(@path_to_config)).result)
   end
 
   def connect_to_s3
