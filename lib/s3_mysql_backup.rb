@@ -2,6 +2,7 @@ require "net/smtp"
 require "time"
 require 'fileutils'
 require 'yaml'
+require 'erb'
 
 require File.dirname(__FILE__) + '/s3utils'
 
