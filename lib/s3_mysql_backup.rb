@@ -42,7 +42,7 @@ class S3MysqlBackup
     filename  = Time.now.strftime("#{@backup_dir}/#{@db_name}.%Y%m%d.%H%M%S.sql.gz")
     host = config['dump_host'] || 'localhost'
     mysqldump = `which mysqldump`.to_s.strip
-    `#{mysqldump} -C --host=#{host} --user=#{config['dump_user']} --password=#{config['dump_pass']} #{@db_name} | gzip > #{filename}`
+    `#{mysqldump} #{config['dump_opts']} --host=#{host} --user=#{config['dump_user']} --password=#{config['dump_pass']} #{@db_name} | gzip > #{filename}`
     @s3utils.store(filename)
     filename
   end

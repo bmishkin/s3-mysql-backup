@@ -13,6 +13,8 @@ s3_bucket: my-bucket
 # dump_pass             the password for the dump user
 dump_user: my-user
 dump_pass: my-pass
+dump_host: my-host
+dump_opts: mysqldump-options
 
 # mail_to               where to send the backup summary email
 mail_to: recipient@example.com
