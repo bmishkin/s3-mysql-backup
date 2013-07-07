@@ -96,18 +96,22 @@ class S3MysqlBackup
       if filedate < weekly && filedate >= monthly
         # keep weeklies and also first of month
         unless filedate.wday == 0 || filedate.day == 1
-          FileUtils.rm_f(name)
+          FileUtils.rm_f(name) if config['keep_local']
           @s3utils.delete(name)
         end
       elsif filedate < monthly
         # delete all old local files
-        FileUtils.rm_f(name)
+        FileUtils.rm_f(name) if config['keep_local']
 
         # keep just first of month in S3
         unless filedate.day == 1
           @s3utils.delete(name)
         end
       end
+
+      # don't keep backups locally (on server)
+      FileUtils.rm_f(name) unless config['keep_local']
+
     end # Dir.each
   end # remove_old_backups
 
